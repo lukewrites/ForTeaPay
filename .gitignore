@@ -55,3 +55,4 @@ docs/_build/
 *.sublime-*
 
 .idea/*
+*.sqlite3-journal
