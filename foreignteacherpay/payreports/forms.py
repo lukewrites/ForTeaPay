@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from payreports.models import Employer
+from models import Employer
 
 
 # class teacherForm(ModelForm):
@@ -11,7 +11,7 @@ from payreports.models import Employer
 #         fields = (user_name, first_name, last_name, password, password_check, email)
 #
 
-class employerForm(forms.ModelForm):
+class EmployerForm(forms.ModelForm):
 
     PROVINCE_LIST = (
         ('AH', 'Anhui'),
@@ -92,33 +92,28 @@ class employerForm(forms.ModelForm):
     )
 
     school_name = forms.CharField(required=True, max_length=128, help_text="Please enter the school's name.")
-    school_city = forms.CharField(required=True, blank=False, max_length=20,
-                                   help_text="Please enter the city in which the school was located.")
-    school_province = forms.CharField(blank=False,
-                                       max_length=2,
+    school_city = forms.CharField(required=True, max_length=20, help_text="Please enter the city in which the school was located.")
+    school_province = forms.ChoiceField(required=True,
                                        choices=PROVINCE_LIST,
-                                       help_text="Please select the school's province.")
-    school_experience = forms.CharField(blank=False,
-                                         max_length=7,
+                                       help_text="Please select the school's province.",
+                                       widget=forms.Select)
+    school_experience = forms.ChoiceField(required=True,
                                          choices=RATINGS,
                                          help_text="How would you rate your experience teaching at this school?",
-                                         default=NEUTRAL)
-    recommend_school = forms.CharField(blank=False,
-                                    max_length=5,
+                                         widget=forms.Select,
+                                         )
+    recommend_school = forms.ChoiceField(required=True,
                                     choices=RECOMMEND,
                                     help_text="Would you recommend this school to a friend?",
-                                    default=MAYBE)
-    date_report_added = forms.DateField(default=timezone.now())
-    start_year = forms.IntegerField(blank=False,
-                                 max_length=4,
-                                 default=2014,
-                                 help_text="In what year did this contract start?")
-    end_year = forms.IntegerField(blank=False,
-                               max_length=4,
-                               default=2014,
-                               help_text="In what year did/will the contract end?")
+                                    widget=forms.Select
+                                    )
+    date_report_added = forms.DateField(widget=forms.HiddenInput())
+    start_year = forms.IntegerField(required=True,
+                                 help_text="In what year did this contract start?",)
+    end_year = forms.IntegerField(required=True,
+                               help_text="In what year did/will the contract end?",)
 
     class Meta:
         model = Employer
-        fields = (school_name, school_city, school_province, school_experience, recommend_school, date_report_added,
-                  start_year, end_year)
+        fields = ('school_name', 'school_city', 'school_province', 'school_experience', 'recommend_school', 'date_report_added',
+                  'start_year', 'end_year')

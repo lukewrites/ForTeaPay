@@ -1,2 +1,43 @@
 {% extends 'base.html' %}
-{% block content %}Hi! Your base view is working!{% endblock %}
+{% load bootstrap3 %}
+{% block title %}TEFL Salaries Worldwide{% endblock %}
+{% block content %}
+        <div class="jumbotron">
+    	<div class="container">
+    		<h1>TEFL Salaries Worldwide</h1>
+    		<p>Contents...</p>
+    		<p>
+    			<a class="btn btn-primary btn-lg">Learn more</a>
+    		</p>
+    	</div>
+        </div>
+    <div class="body">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+    	<h3>Oh damn, this is 10 columns!</h3>
+        <div class="col-xs-10">
+            <form action="/" method="POST" role="form" id="employer_form">
+            	<legend>Put in your data</legend>
+
+            		{% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}<br/>
+                        {{ field }}<br/>
+                    {% endfor %}
+
+
+
+            	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            </form>
+
+</div>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    	<h3>Only 2 columns.</h3>
+    </div>
+    </div>
+{% endblock %}
