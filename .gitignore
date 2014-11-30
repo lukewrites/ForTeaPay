@@ -58,3 +58,5 @@ docs/_build/
 *.sqlite3-journal
 
 foreignteacherpay/db.sqlite3
+
+foreignteacherpay/db.sqlite3

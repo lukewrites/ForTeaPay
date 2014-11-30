@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import ModelForm
 from django.utils import timezone
 from payreports.models import Employer
 
@@ -12,7 +11,7 @@ from payreports.models import Employer
 #         fields = (user_name, first_name, last_name, password, password_check, email)
 #
 
-class employerForm(ModelForm):
+class employerForm(forms.ModelForm):
 
     PROVINCE_LIST = (
         ('AH', 'Anhui'),
