@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block title %}TEFL Salaries Worldwide{% endblock %}
-{% block content %}
-        <div class="jumbotron">
-    	<div class="container">
-    		<h1>TEFL Salaries Worldwide</h1>
-    		<p>Contents...</p>
-    		<p>
-    			<a class="btn btn-primary btn-lg">Learn more</a>
-    		</p>
-    	</div>
+{% block jumbotron %}
+<div class="jumbotron">
+        <div class="container">
+            <h1>TEFL Salaries Worldwide</h1>
+            <p>Contents...</p>
+            <p>
+                <a class="btn btn-primary btn-lg">Learn more</a>
+            </p>
         </div>
-    <div class="body">
+    </div>
+{% endblock %}
+{% block content %}
+
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	<h3>Oh damn, this is 10 columns!</h3>
-        <div class="col-xs-10">
+    	<h3>Main, 10 columns!</h3>
+            <p>Please enter your employment information into the form below. This data will be added to your user profile.</p>
             <form action="/" method="POST" role="form" id="employer_form">
             	<legend>Put in your data</legend>
 
@@ -24,20 +26,17 @@
                     {% endfor %}
 
                     {% for field in form.visible_fields %}
-                        {{ field.errors }}
                         {{ field.help_text }}<br/>
-                        {{ field }}<br/>
+                        {{ field }}{{ field.errors }}<br/>
                     {% endfor %}
 
 
 
             	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </form>
+    </div>
 
-</div>
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    	<h3>Only 2 columns.</h3>
-    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+    	<h3>2 col sidebar</h3>
     </div>
 {% endblock %}

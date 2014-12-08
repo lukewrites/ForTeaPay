@@ -6,9 +6,10 @@ from forms import EmployerForm
 def index(request):
     if request.method=='POST':
         form = EmployerForm(request.POST)
+        # form.teacher = 1
         if form.is_valid():
             form.save()
-            return index(request)
+            return thanks(request)
         else:
             print(form.errors)
     else:

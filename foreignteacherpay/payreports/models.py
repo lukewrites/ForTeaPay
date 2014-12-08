@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 from django.utils import timezone
 
 
@@ -96,7 +97,7 @@ class Employer(models.Model):
         (MONTHLY, 'Monthly'),
     )
 
-    teacher = models.ForeignKey("Teacher")
+    # teacher = models.ForeignKey("Teacher")
     school_name = models.CharField(blank=False,
                                    max_length=100,
                                    help_text="Please enter the school's name.")
@@ -117,7 +118,7 @@ class Employer(models.Model):
                                         choices=RECOMMEND,
                                         help_text="Would you recommend this school to a friend?",
                                         default=MAYBE)
-    date_report_added = models.DateField(default=timezone.now())
+    date_report_added = models.DateField(default=date.isoformat(timezone.now()))
     start_year = models.IntegerField(blank=False,
                                      max_length=4,
                                      default=2014,

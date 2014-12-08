@@ -1,4 +1,5 @@
 from django import forms
+from datetime import date
 from django.utils import timezone
 from models import Employer
 
@@ -91,6 +92,7 @@ class EmployerForm(forms.ModelForm):
         (MONTHLY, 'Monthly'),
     )
 
+    # teacher = forms.IntegerField(widget=forms.HiddenInput())
     school_name = forms.CharField(required=True, max_length=128, help_text="Please enter the school's name.")
     school_city = forms.CharField(required=True, max_length=20, help_text="Please enter the city in which the school was located.")
     school_province = forms.ChoiceField(required=True,
@@ -107,7 +109,8 @@ class EmployerForm(forms.ModelForm):
                                     help_text="Would you recommend this school to a friend?",
                                     widget=forms.Select
                                     )
-    date_report_added = forms.DateField(widget=forms.HiddenInput())
+    date_report_added = forms.CharField(widget=forms.HiddenInput(),
+                                        initial=date.isoformat(timezone.now()))
     start_year = forms.IntegerField(required=True,
                                  help_text="In what year did this contract start?",)
     end_year = forms.IntegerField(required=True,

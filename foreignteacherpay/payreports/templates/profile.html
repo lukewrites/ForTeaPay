@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    {{ user.first_name }} {{ user.last_name }}, {{ user.title }} {% if user.employer %}at {{ user.employer }} {% endif %}<br />
+    {% for job in user.job_list %}
+
+        {{ job.start_year }} – {{ job.end_year }} <strong>{{ job.employer_name }}</strong>, {{ job.title }}. <em>{{ job.city }},
+        {{ job.province }}</em><br />
+        <strong><em>Duties:</em></strong>
+    {% endfor %}
+{% endblock %}
