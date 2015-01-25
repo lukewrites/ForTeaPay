@@ -56,14 +56,11 @@ class Employer(models.Model):
         ('ZJ', 'Zhejiang'),
     )
 
-    GOOD = 'G'
-    NEUTRAL = 'N'
-    BAD = 'B'
 
     RATINGS = (
-        (GOOD, 'Good'),
-        (NEUTRAL, 'Neutral'),
-        (BAD, 'Bad')
+        ('G', 'Good'),
+        ('N', 'Neutral'),
+        ('B', 'Bad')
         )
 
     YES = 'Y'
@@ -81,20 +78,16 @@ class Employer(models.Model):
         (NO, 'No'),
     )
 
-    FULL_TIME = 'FT'
-    PART_TIME = 'PT'
 
     CONTRACT_TYPE_CHOICES = (
-        (FULL_TIME, 'Full-time'),
-        (PART_TIME, 'Part-time'),
+        ('FT', 'Full-time'),
+        ('PT', 'Part-time'),
     )
 
-    HOURLY = 'H'
-    MONTHLY = 'M'
 
     HOURLY_MONTHLY_CHOICES = (
-        (HOURLY, 'Hourly'),
-        (MONTHLY, 'Monthly'),
+        ('H', 'Hourly'),
+        ('M', 'Monthly'),
     )
 
     # teacher = models.ForeignKey("Teacher")
@@ -112,7 +105,7 @@ class Employer(models.Model):
                                          max_length=7,
                                          choices=RATINGS,
                                          help_text="How would you rate your experience teaching at this school?",
-                                         default=NEUTRAL)
+                                         default='N')
     recommend_school = models.CharField(blank=False,
                                         max_length=5,
                                         choices=RECOMMEND,
@@ -131,13 +124,13 @@ class Employer(models.Model):
                                      max_length=2,
                                      help_text="Full-time (FT) or Part-Time (PT) work.",
                                      choices=CONTRACT_TYPE_CHOICES,
-                                     default=FULL_TIME)
+                                     default='FT')
     pay = models.IntegerField(blank=True,
                               default=0,
                               help_text="How much were you paid?")
     type_of_wage = models.CharField(help_text="Is the pay above hourly or monthly?",
                                     choices=HOURLY_MONTHLY_CHOICES,
-                                    default=HOURLY,
+                                    default='H',
                                     max_length=1)
     hours_per_week = models.IntegerField(blank=True,
                                          default=0)
