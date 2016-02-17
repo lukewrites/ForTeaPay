@@ -3,7 +3,6 @@ from datetime import date
 from django.utils import timezone
 
 
-
 class Teacher(models.Model):
     user_name = models.CharField(max_length=20, blank=False, unique=True)
     first_name = models.CharField(max_length=20, blank=False)
@@ -136,7 +135,7 @@ class Employer(models.Model):
                                          default=0)
     vacation_time = models.IntegerField(blank=True,
                                         default=0,
-                                        help_text="Days of vacation per contract (EXCLUDING Chinese holidays).",
+                                        help_text="Days of vacation per contract (INCLUDING Chinese holidays).",
                                         max_length=3)
     student_level = models.TextField(blank=True,
                                      help_text="What level(s) of students did you teach?")

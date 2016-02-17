@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import generic
 from forms import EmployerForm
 
+from .models import Employer
+
 # Create your views here.
 def index(request):
     if request.method=='POST':
@@ -20,3 +22,16 @@ def index(request):
 
 def thanks(request):
     return render(request, 'thanks.html')
+
+
+class IndexView(generic.ListView):
+    template_name = 'schools.html'
+    context_object_name = 'school_list'
+
+    def get_queryset(self):
+        return Employer.objects.order_by('school_province')
+
+
+def schools(request):
+    context_dict = {''}
+    return render(request, 'schools.html', context_dict)
